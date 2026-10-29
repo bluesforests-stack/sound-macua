@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    
+    <meta
+      name="description"
+      content="聆聽珠海與澳門的十二段城市聲音，選擇音高、下拉打孔，將自己的感受生成可試聽、下載的專屬數位八音盒與聲音紙帶。"
+    />
+    <title>城市聲音打孔機｜珠海 × 澳門</title>
+    <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="./shared/ui.css?v=20261028-white"><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./layout.css?v=20261028-workbench"><script src="./shared/presentation.js" defer></script></head>
+  <body class="atlas-sound"><header class="portal-header"><a class="portal-home" href="./">Hengqin-Macau Sensory Atlas</a><nav class="portal-nav" aria-label="項目導覽"><a href="./" aria-current="page"><small>03</small>Sound</a></nav><div class="portal-meta"><a href="https://bluesforests-stack.github.io/--AA/" target="_blank" rel="noopener noreferrer">返回完整主站 ↗</a><span>SOUND / STANDALONE</span></div></header>
+    <main class="experience" data-city="zhuhai">
+      <header class="topbar" aria-label="作品控制列">
+        <div class="identity">
+          <p class="eyebrow">CITY SONIC PUNCH / 2026</p>
+          <a class="sound-film-title" href="https://b23.tv/s1Hm2o0" target="_blank" rel="noopener noreferrer">聲音影像 ↗</a>
+          <h1>城市聲音打孔機</h1>
+        </div>
+
+
+
+        <div class="top-actions">
+          <button class="guide-button" id="guide-button" type="button" aria-label="查看新手指南">?</button>
+          <button class="sound-button" type="button" aria-pressed="false" aria-label="開啟或關閉城市聲音">
+            <span class="sound-icon" aria-hidden="true"></span>
+            <span class="sound-copy">SOUND OFF</span>
+          </button>
+          <button class="end-button" id="end-button" type="button" aria-label="完成並生成專屬聲音檔案">
+            <span>OK</span><small>完成</small>
+          </button>
+        </div>
+        <div class="city-controls"><span class="city-controls-label">選擇城市</span>
+        <div class="city-switch" role="tablist" aria-label="選擇城市聲音">
+          <button
+            class="city-button is-active"
+            id="zhuhai-tab"
+            data-city="zhuhai"
+            role="tab"
+            aria-controls="machine-stage"
+            aria-selected="true"
+            tabindex="0"
+          >
+            <span>珠海</span><small>ZHUHAI</small>
+          </button>
+          <button
+            class="city-button"
+            id="macau-tab"
+            data-city="macau"
+            role="tab"
+            aria-controls="machine-stage"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            <span>澳門</span><small>MACAU</small>
+          </button>
+        </div>
+        </div>
+      </header>
+
+      <section class="workbench" aria-label="手搖打孔機互動區">
+        <div
+          class="machine-stage"
+          id="machine-stage"
+          role="tabpanel"
+          aria-labelledby="zhuhai-tab"
+        >
+          <img
+            class="machine-image"
+            id="machine-image"
+            src="assets/zhuhai-machine.png"
+            alt="綠色、粉色與白色相間的珠海城市聲音手搖打孔機"
+            draggable="false"
+          />
+
+          <div class="paper-flow top-paper" aria-hidden="true">
+            <div class="paper-ribbon"></div>
+            <div class="paper-scan"></div>
+            <div class="holes-layer" id="holes-layer"></div>
+          </div>
+          <div class="paper-flow bottom-paper" aria-hidden="true">
+            <div class="paper-ribbon"></div>
+            <div class="paper-scan"></div>
+          </div>
+
+          <div class="punch-point" aria-hidden="true">
+            <span></span>
+          </div>
+
+          <div class="gear-overlay gear-large" aria-hidden="true"></div>
+          <div class="gear-overlay gear-small" aria-hidden="true"></div>
+
+          <div class="gesture-zone" id="gesture-zone">
+            <div class="gesture-track" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </div>
+            <button
+              class="drag-handle"
+              id="drag-handle"
+              type="button"
+              aria-label="向下拖動手柄打孔。也可以按空格鍵或向下方向鍵。"
+            >
+              <span class="handle-cap"><b></b></span>
+              <span class="handle-label">PULL</span>
+            </button>
+          </div>
+
+          <div class="status-panel" aria-live="polite">
+            <div class="status-copy">
+              <span class="status-city">珠海城市聲音</span>
+              <strong><span id="punch-count">00</span> HOLES</strong>
+              <span class="track-title" id="track-title">01 / 澳琴國際教育大學城</span>
+            </div>
+            <div class="audio-bars" id="audio-bars" aria-hidden="true"></div>
+          </div>
+
+
+
+          <div class="drag-instruction" aria-hidden="true">
+            <span>TOUCH + PULL DOWN</span>
+            <i></i>
+            <em>向下拉動 · 重複打孔</em>
+          </div>
+        </div>
+        <section class="response-controls" aria-label="聲音旅程與音高選擇">
+            <p class="response-kicker">YOUR SONIC RESPONSE</p>
+            <label class="listen-label" for="listen-progress">12 段城市聲音旅程</label>
+            <progress id="listen-progress" max="1" value="0">0%</progress>
+            <div class="pitch-heading">
+              <label for="pitch-slider">選擇下一個音符</label>
+              <output id="pitch-note" for="pitch-slider">A5</output>
+            </div>
+            <input id="pitch-slider" type="range" min="0" max="9" step="1" value="4" aria-label="下一次打孔的音高，左邊低、右邊高" aria-valuetext="A5" />
+            <div class="pitch-extents" aria-hidden="true"><span>低音</span><span>高音</span></div>
+            <p class="response-hint">隨感受選音高，再下拉手柄。<br />每一個孔，都是你的一個音符。</p>
+          </section>
+      </section>
+
+      <footer class="footer-note">
+        <span>紙帶方向：由下而上</span>
+        <span>LISTEN → PUNCH → YOUR MELODY</span>
+      </footer>
+    </main>
+
+    <section
+      class="tutorial-overlay"
+      id="tutorial-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="tutorial-title"
+      hidden
+    >
+      <article class="tutorial-card">
+        <header class="tutorial-header">
+          <p>QUICK GUIDE / 3 STEPS</p>
+          <h2 id="tutorial-title">聽見城市，譜下自己的感受。</h2>
+        </header>
+
+        <ol class="tutorial-steps">
+          <li>
+            <span class="tutorial-number">01</span>
+            <div class="tutorial-symbol tutorial-sound" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div><strong>聆聽 12 段城市聲音</strong><small>選擇珠海或澳門，點開音樂。兩段一組疊加播放，共六組，提前載入、交疊銜接。</small></div>
+          </li>
+          <li>
+            <span class="tutorial-number">02</span>
+            <div class="tutorial-symbol tutorial-pull" aria-hidden="true"><i></i></div>
+            <div><strong>選音高，隨感受下拉</strong><small>滑桿左低右高。聆聽時下拉手柄，每個孔留下你選擇的音符與節奏。</small></div>
+          </li>
+          <li>
+            <span class="tutorial-number">03</span>
+            <div class="tutorial-symbol tutorial-ok" aria-hidden="true">OK</div>
+            <div><strong>OK，聽見自己的八音盒</strong><small>生成專屬數位旋律，線上試聽，並保存 JPG 紙帶與 WAV 聲音。</small></div>
+          </li>
+        </ol>
+
+        <button class="tutorial-start" id="tutorial-start" type="button">
+          <span>開始體驗</span><small>START</small>
+        </button>
+      </article>
+    </section>
+
+    <section
+      class="archive-overlay"
+      id="archive-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="archive-title"
+      hidden
+    >
+      <article class="archive-card">
+        <header class="archive-header">
+          <div>
+            <p class="archive-kicker">YOUR CITY MEMORY / DIGITAL MUSIC BOX</p>
+            <h2 id="archive-title">專屬聲音檔案已生成</h2>
+          </div>
+          <button class="archive-close" id="archive-close" type="button" aria-label="關閉聲音檔案">×</button>
+        </header>
+
+        <p class="archive-summary" id="archive-summary">完整紙帶與打孔記錄正在合成。</p>
+
+        <section class="melody-panel" aria-label="專屬八音盒旋律">
+          <div class="melody-intro">
+            <h3>把城市的感受，留成一段旋律。</h3>
+            <p id="melody-summary" aria-live="polite">你的孔位正在轉成音符。</p>
+          </div>
+          <div class="melody-scroll" tabindex="0" role="region" aria-label="聲音紙帶樂譜，可左右捲動查看">
+            <canvas id="melody-canvas" width="1000" height="420" aria-label="每個孔對應一個音符的專屬聲音紙帶">你的專屬旋律紙帶。</canvas>
+          </div>
+          <p class="melody-scroll-hint">左右滑動查看紙帶 · 綠線跟隨旋律播放</p>
+          <div class="melody-actions">
+            <button id="melody-play" class="melody-primary" type="button" disabled>試聽我的八音盒</button>
+            <button id="roll-download" type="button" disabled>保存紙帶 JPG</button>
+            <button id="melody-download" type="button" disabled>下載旋律 WAV</button>
+          </div>
+        </section>
+
+        <details class="original-archive">
+          <summary>查看完整城市聲音檔案</summary>
+          <div class="archive-preview" id="archive-preview" aria-live="polite">
+            <div class="archive-loading" id="archive-loading">
+              <i></i><span>GENERATING JPG</span>
+            </div>
+            <img id="archive-image" alt="打孔後的城市聲音紙帶 JPG" hidden />
+          </div>
+        </details>
+
+        <div class="archive-actions">
+          <a class="archive-download is-disabled" id="archive-download" aria-disabled="true">下載完整檔案 JPG</a>
+          <button class="archive-restart" id="archive-restart" type="button">重新開始</button>
+        </div>
+      </article>
+    </section>
+
+    <script src="city-audio.js?v=9"></script>
+    <script src="music-roll.js?v=9"></script>
+    <script src="app.js?v=9"></script>
+  </body>
+</html>
